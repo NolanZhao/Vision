@@ -69,10 +69,7 @@ def get_homography(img1, img2, method=0):
     method: 0 findHomography
             1 estimateAffine2D
     """
-    sift = cv2.xfeatures2d.SIFT_create(nfeatures=999999,
-                                       nOctaveLayers=6,
-                                       contrastThreshold=0.004,
-                                       edgeThreshold=3)
+    sift = cv2.xfeatures2d.SIFT_create(nfeatures=999999, nOctaveLayers=6, contrastThreshold=0.004, edgeThreshold=3)
 
     img1_ = copy.deepcopy(img1)
     img2_ = copy.deepcopy(img2)
@@ -81,12 +78,8 @@ def get_homography(img1, img2, method=0):
     kp2, des2 = sift.detectAndCompute(img2_, None)
 
     matcher = cv2.FlannBasedMatcher()
-    raw_matches = matcher.knnMatch(np.asarray(des1, np.float32),
-                                   np.asarray(des2, np.float32),
-                                   k=2)
-    good_matches = [
-        m1 for m1, m2 in raw_matches if m1.distance < 0.6 * m2.distance
-    ]
+    raw_matches = matcher.knnMatch(np.asarray(des1, np.float32), np.asarray(des2, np.float32), k=2)
+    good_matches = [m1 for m1, m2 in raw_matches if m1.distance < 0.6 * m2.distance]
 
     image1_kp = np.float32([kp1[m.queryIdx].pt for m in good_matches])
     image2_kp = np.float32([kp2[m.trainIdx].pt for m in good_matches])
@@ -144,8 +137,7 @@ def wrapimgs(imgs, homos, corners):
         lx, rx, uy, dy = corners[index].getoutsize()
         cols = int(rx - lx * (lx < 0))
         rows = int(dy) - int(min_up)
-        wrap = cv2.warpPerspective(imgs[index], np.dot(tem, homos[index]),
-                                   (cols, rows))
+        wrap = cv2.warpPerspective(imgs[index], np.dot(tem, homos[index]), (cols, rows))
         # cv2.imwrite('wrapimgs_{}.jpg'.format(index), wrap)
         wraps.append(wrap)
     return wraps
@@ -209,9 +201,8 @@ def main():
     print("wraps done.")
 
     stitch_im = putimages(wraps)
-    print("stitch done.")
-
     cv2.imwrite('output/a.jpg', stitch_im)
+    print("stitch done.")
 
 
 main()

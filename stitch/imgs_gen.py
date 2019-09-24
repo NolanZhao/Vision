@@ -36,11 +36,11 @@ def devide_2():
     h, w, _ = source_img.shape
 
     img0 = copy.deepcopy(source_img)
-    crop_img0 = img0[0:h, 0:3*w//5]
+    crop_img0 = img0[0:h, 0:3 * w // 5]
     cv2.imwrite("1.jpg", crop_img0)
 
     img1 = copy.deepcopy(source_img)
-    crop_img1 = img1[0:h, 2*w//5:w]
+    crop_img1 = img1[0:h, 2 * w // 5:w]
     cv2.imwrite("2.jpg", crop_img1)
 
 
@@ -50,15 +50,15 @@ def devide_3():
     delta = 60
 
     img0 = copy.deepcopy(source_img)
-    crop_img0 = img0[0:h, 0:int((1/3) * w + delta)]
+    crop_img0 = img0[0:h, 0:int((1 / 3) * w + delta)]
     cv2.imwrite("1.jpg", crop_img0)
 
     img1 = copy.deepcopy(source_img)
-    crop_img1 = img1[0:h, int((1/3) * w - delta / 2):int((2/3) * w + delta / 2)]
+    crop_img1 = img1[0:h, int((1 / 3) * w - delta / 2):int((2 / 3) * w + delta / 2)]
     cv2.imwrite("2.jpg", crop_img1)
 
     img1 = copy.deepcopy(source_img)
-    crop_img1 = img1[0:h, int((2/3) * w - delta / 2):w]
+    crop_img1 = img1[0:h, int((2 / 3) * w - delta / 2):w]
     cv2.imwrite("3.jpg", crop_img1)
 
 
@@ -68,26 +68,24 @@ def devide_5():
     delta = 40
 
     img0 = copy.deepcopy(source_img)
-    crop_img0 = img0[0:h, 0:int((1/5) * w + delta)]
+    crop_img0 = img0[0:h, 0:int((1 / 5) * w + delta)]
     cv2.imwrite("1.jpg", crop_img0)
 
     img1 = copy.deepcopy(source_img)
-    crop_img1 = img1[0:h, int((1/5) * w - delta / 2):int((2/5) * w + delta / 2)]
+    crop_img1 = img1[0:h, int((1 / 5) * w - delta / 2):int((2 / 5) * w + delta / 2)]
     cv2.imwrite("2.jpg", crop_img1)
 
     img1 = copy.deepcopy(source_img)
-    crop_img1 = img1[0:h, int((2/5) * w - delta / 2):int((3/5) * w + delta / 2)]
+    crop_img1 = img1[0:h, int((2 / 5) * w - delta / 2):int((3 / 5) * w + delta / 2)]
     cv2.imwrite("3.jpg", crop_img1)
 
     img1 = copy.deepcopy(source_img)
-    crop_img1 = img1[0:h, int((3/5) * w - delta / 2):int((4/5) * w + delta / 2)]
+    crop_img1 = img1[0:h, int((3 / 5) * w - delta / 2):int((4 / 5) * w + delta / 2)]
     cv2.imwrite("4.jpg", crop_img1)
 
     img1 = copy.deepcopy(source_img)
-    crop_img1 = img1[0:h, int((4/5) * w - delta):w]
+    crop_img1 = img1[0:h, int((4 / 5) * w - delta):w]
     cv2.imwrite("5.jpg", crop_img1)
-
-
 
 
 devide_5()

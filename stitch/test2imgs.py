@@ -5,9 +5,7 @@ import numpy as np
 def getH(kp1, kp2, des1, des2):
     # matcher = cv2.BFMatcher()
     matcher = cv2.FlannBasedMatcher()
-    raw_matches = matcher.knnMatch(np.asarray(des1, np.float32),
-                                   np.asarray(des2, np.float32),
-                                   k=2)
+    raw_matches = matcher.knnMatch(np.asarray(des1, np.float32), np.asarray(des2, np.float32), k=2)
 
     good_points = []
     good_matches = []
@@ -51,10 +49,10 @@ def main():
     wrap = cv2.warpPerspective(img2, H21, (w * 2, h))
     label = (cv2.cvtColor(wrap[:h, :w * 2, :], cv2.COLOR_BGR2GRAY) > 0)
     for i in range(panorama.shape[2]):
-        panorama[:h, :w * 2, i] = wrap[:h, :w * 2, i] * (
-            label > 0) + panorama[:h, :w * 2, i] * (label < 1)
+        panorama[:h, :w * 2, i] = wrap[:h, :w * 2, i] * (label > 0) + panorama[:h, :w * 2, i] * (label < 1)
 
     cv2.imwrite('output/a.jpg', panorama)
+    print("stitch done.")
 
 
 main()

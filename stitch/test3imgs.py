@@ -5,9 +5,7 @@ import numpy as np
 def getH(kp1, kp2, des1, des2):
     # matcher = cv2.BFMatcher()
     matcher = cv2.FlannBasedMatcher()
-    raw_matches = matcher.knnMatch(np.asarray(des1, np.float32),
-                                   np.asarray(des2, np.float32),
-                                   k=2)
+    raw_matches = matcher.knnMatch(np.asarray(des1, np.float32), np.asarray(des2, np.float32), k=2)
 
     good_points = []
     good_matches = []
@@ -37,10 +35,7 @@ def main():
     img2 = cv2.imread("images/3imgs/2.jpg", cv2.IMREAD_COLOR)
     img3 = cv2.imread("images/3imgs/3.jpg", cv2.IMREAD_COLOR)
 
-    sift = cv2.xfeatures2d.SIFT_create(nfeatures=999999,
-                                       nOctaveLayers=6,
-                                       contrastThreshold=0.004,
-                                       edgeThreshold=3)
+    sift = cv2.xfeatures2d.SIFT_create(nfeatures=999999, nOctaveLayers=6, contrastThreshold=0.004, edgeThreshold=3)
     kp1, des1 = sift.detectAndCompute(img1, None)
     kp2, des2 = sift.detectAndCompute(img2, None)
     kp3, des3 = sift.detectAndCompute(img3, None)
@@ -62,16 +57,15 @@ def main():
     wrap1 = cv2.warpPerspective(img1, H12, (w * 3, h))
     label1 = (cv2.cvtColor(wrap1[:h, :w * 3, :], cv2.COLOR_BGR2GRAY) > 0)
     for i in range(panorama.shape[2]):
-        panorama[:h, :w * 3, i] = wrap1[:h, :w * 3, i] * (
-            label1 > 0) + panorama[:h, :w * 3, i] * (label1 < 1)
+        panorama[:h, :w * 3, i] = wrap1[:h, :w * 3, i] * (label1 > 0) + panorama[:h, :w * 3, i] * (label1 < 1)
 
     wrap3 = cv2.warpPerspective(img3, H32, (w * 3, h))
     label3 = (cv2.cvtColor(wrap3[:h, :w * 3, :], cv2.COLOR_BGR2GRAY) > 0)
     for i in range(panorama.shape[2]):
-        panorama[:h, :w * 3, i] = wrap3[:h, :w * 3, i] * (
-            label3 > 0) + panorama[:h, :w * 3, i] * (label3 < 1)
+        panorama[:h, :w * 3, i] = wrap3[:h, :w * 3, i] * (label3 > 0) + panorama[:h, :w * 3, i] * (label3 < 1)
 
     cv2.imwrite('output/a.jpg', panorama)
+    print("stitch done.")
 
 
 main()
