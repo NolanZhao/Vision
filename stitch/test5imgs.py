@@ -18,6 +18,7 @@ class Point(object):
         point_new /= point_new[2, 0]
         self.x = point_new[0, 0]
         self.y = point_new[1, 0]
+        point_new = np.dot(homo, point_old)
         self.z = point_new[2, 0]
 
 
